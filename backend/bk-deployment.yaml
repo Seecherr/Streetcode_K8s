@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+
+kind: Deployment
+metadata:
+    name: backend
+    labels:
+        app: backend
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: backend
+    template:
+        metadata:
+            labels:
+                app: backend
+        spec:
+            containers:
+                - name: backend
+                  image: yurti/streetcode_back
+                  env:
+                    - name: STREETCODE_ConnectionStrings__DefaultConnection
+                      value: Server=mssql-service,1433;Database=master;User Id=sa;Password=Ss11_ddd;MultipleActiveResultSets=true;Encrypt=False;TrustServerCertificate=True;
