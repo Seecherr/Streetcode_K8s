@@ -23,9 +23,9 @@ jobs:
       - name : Preparing cluster for kube-ez
 ## Commands that setup the cluster as per my project needs
         run: |
-          kubectl apply -f ./../backend/
-          kubectl apply -f ./../frontend/
-          kubectl applu -f ./../mssql/
+          kubectl apply -f ./backend/
+          kubectl apply -f ./frontend/
+          kubectl applu -f ./mssql/
           sleep 20
       - run: |
           curl -i http://localhost:30080/
