@@ -14,7 +14,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Apply the manifests
-        run: kubectl apply -f ./backend && kubectl apply -f ./frontend && kubectl apply -f ./mssql
+      - name: Testing on a k8s Kind Cluster
+        uses: helm/kind-action@v1.4.0
+## makes sure cluster is up and running
+      - run: |
+          kubectl cluster-info
+          kubectl get nodes
+      - name : Preparing cluster for kube-ez
+## Commands that setup the cluster as per my project needs
+        run: |
+          kubectl apply -f ./../backend/
+          kubectl apply -f ./../frontend/
+          kubectl applu -f ./../mssql/
+          sleep 20
+      - run: |
+          curl -i http://localhost:30080/
         
 
