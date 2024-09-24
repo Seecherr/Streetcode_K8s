@@ -20,6 +20,9 @@ spec:
                   image: yurti/streetcode_cli
                   env:
                     - name: REACT_APP_BACKEND_URL
-                      value: http://backend-service:5001/api
+                      valueFrom:
+                        configMapKeyRef:
+                            name: backend-url
+                            key: url
                   ports:
                     - containerPort: 3000

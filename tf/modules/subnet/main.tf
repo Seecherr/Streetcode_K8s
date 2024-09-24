@@ -1,6 +1,5 @@
 data "aws_availability_zones" "AZN" {}
 
-#Public Subnet
 resource "aws_subnet" "publicSubnet" {
   count = length(var.publicSubnetCIDR)
   cidr_block = var.publicSubnetCIDR
@@ -15,7 +14,6 @@ resource "aws_subnet" "publicSubnet" {
   }
 }
 
-#Internet Gateway for the VPC to provide internet access
 resource "aws_internet_gateway" "internetGateway" {
   vpc_id = var.vpc_id
 
@@ -24,7 +22,6 @@ resource "aws_internet_gateway" "internetGateway" {
   }
 }
 
-#Resource to provide public routes for our Internet Gateway
 resource "aws_route_table" "public_routetable" {
   vpc_id = var.vpc_id
 
@@ -38,8 +35,6 @@ resource "aws_route_table" "public_routetable" {
   }
 }
 
-# resource "aws_route_table_association" is needed to determine subnets
-# which  will be connected to the Internet Gateway and Public Routes
 resource "aws_route_table_association" "public_routetableAssociation" {
   count = length(var.publicSubnetCIDR)
   subnet_id = aws_subnet.publicSubnet[count.index].id

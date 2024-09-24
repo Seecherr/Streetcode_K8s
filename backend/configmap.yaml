@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+data:
+  connection_string: Server=mssql-service,1433;Database=master;User Id=sa;Password=Ss11_ddd;MultipleActiveResultSets=true;Encrypt=False;TrustServerCertificate=True;
+
