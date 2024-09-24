@@ -8,6 +8,9 @@ on:
 
   workflow_dispatch:
 
+  repository_dispatch:
+    types: [dispatch-event]
+
 jobs:
   Test-config:
     runs-on: ubuntu-latest
